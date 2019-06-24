@@ -48,6 +48,14 @@ get_hint <- function(text){
 }
 
 
+#' Title
+#'
+#' @param path
+#'
+#' @return
+#' @export
+#'
+#' @examples
 get_chapters <- function(path) {
   file_names <- list.files(path=path, pattern="chapter")
   file_list <- list.files(path = path, pattern = "chapter", full.names = TRUE)
@@ -118,6 +126,14 @@ extract_multiple_exercise <- function(text){
 }
 
 
+#' Title
+#'
+#' @param chapter_file
+#'
+#' @return
+#' @export
+#'
+#' @examples
 get_exercises <- function(chapter_file){
 
   exercise_name_regex <- "--- type:*.+[\\s\\S]*?\n"
@@ -129,6 +145,15 @@ get_exercises <- function(chapter_file){
 
 }
 
+#' Title
+#'
+#' @param exlist
+#' @param basename
+#'
+#' @return
+#' @export
+#'
+#' @examples
 number_ex_list <- function(exlist, basename = "01"){
   end_num <- sprintf("%02d",1:length(exlist))
   out_names <- paste(basename, end_num, sep="_")
@@ -220,6 +245,14 @@ make_multiple_block <- function(block_name, block){
   return(textblock)
 }
 
+#' Title
+#'
+#' @param exercise_list
+#'
+#' @return
+#' @export
+#'
+#' @examples
 parse_exercise_list <- function(exercise_list){
   exercise_out_list <- lapply(names(exercise_list), function(x){
     out_list <- NULL
@@ -236,6 +269,15 @@ parse_exercise_list <- function(exercise_list){
 
 
 
+#' Given an exercise list and a chapter name, writes files.
+#'
+#' @param ex_list
+#' @param chapter_name
+#'
+#' @return written exercises/solutions in `exercises/` and written chapter in `chapters/`
+#' @export
+#'
+#' @examples
 save_exercise_list <- function(ex_list, chapter_name){
   ex_path <- "exercises"
   chapter_path <- "chapters"
