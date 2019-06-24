@@ -3,11 +3,11 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-`decampr` consists of some simple utilities to process R-based DataCamp lessons to Ines' gatsby/binder based course setup available here: https://github.com/ines/course-starter-r 
+`decampr` consists of some simple utilities to process R-based DataCamp lessons to Ines Montani's Gatsby/Binder based course setup available here: https://github.com/ines/course-starter-r 
 
-`decampr` speeds up building courses by parsing the DataCamp format and outputting the correct files (chapter.mds, exercises, solutions, and multiple choice questions).   
+`decampr` speeds up building these courses by parsing the DataCamp format and outputting the correct files (chapter.mds, exercises, solutions, and multiple choice questions).   
 
-Note that I'm not a regular expression master and I don't have access to any DataCamp repositories other than my own online one. If you have an example chapter and would like to contribute it, please add a PR and put it in `inst/extdata`. 
+Note that I'm not a regular expression master and I don't have access to any DataCamp repositories other than my own online one here: http://github.com/laderast/RBootcamp_old. If you have an example chapter and would like to contribute it as a reproducible example, please add a PR and put it in `inst/extdata`. 
 
 ## Installation
 
@@ -23,10 +23,20 @@ remotes::install_github("laderast/decampr")
 `decampr` is based on some rather fragile regular expressions, particularly for extracting the exercise code. It assumes that you have at least two linebreaks separating each exercise. That is:
 
 ```
-
+*** =sct
+```{r}
+success_msg("Great! You learned some basics about `data.frame`s! Let's move on.")
+test_function("colnames", incorrect_msg = "did you use colnames(gap1992)?")
+test_function("nrow", incorrect_msg = "did you use nrow(gap1992)")
+```
+              ## <- Note there are two line breaks, here
+              ## <- and here!
+--- type:MultipleChoiceExercise lang:r xp:100 skills:1 key:d599f92ec8
+## Thinking about aesthetics
+Now that we've learned a little about the `data.frame`, we can get to the fun part: making graphs.
 ```
 
-Make sure the last exercise also has at least two linebreaks and is followed by a `---`.
+Also, make sure the last exercise in your chapter has at least two linebreaks and is followed by a `---`.
 
 ## Using `decampr`
 
