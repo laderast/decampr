@@ -1,9 +1,3 @@
-library(dplyr)
-library(stringr)
-library(glue)
-library(here)
-library(rmarkdown)
-
 convert_to_unix_linebreaks <- function(text){
 
   gsub("\r", "", text)
