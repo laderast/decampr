@@ -1,0 +1,22 @@
+Package: decampr
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Ted",
+           family = "Laderas",
+           role = c("aut", "cre"),
+           email = "tedladeras@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    glue,
+    stringr,
+    here,
+    rmarkdown,
+    dplyr,
+    usethis
+Suggests: 
+    testthat (>= 2.1.0)
