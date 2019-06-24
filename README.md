@@ -74,6 +74,12 @@ save_exercise_list(exercise_list, "chapter1.md")
 
 Exercises/solutions will be written to `exercises/` and the chapter.md files will be written to `chapters/`. 
 
+Note that submission correctness tests are not currently captured, nor is the correct answer to the multiple choice exercise captured. The correct answer can be added to that exercise by editing the appropriate `chapter.md` file.
+
 ## Contributing
 
 Please note that the 'decampr' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+
+## License
+
+Licensed with an MIT license.
