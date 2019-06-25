@@ -139,6 +139,10 @@ get_exercises <- function(chapter_file){
 
 }
 
+get_yaml <- function(chapter_file_name){
+  rmarkdown::yaml_front_matter(chapter_file_name)
+}
+
 #' Title
 #'
 #' @param exlist
@@ -186,9 +190,12 @@ make_exercise_block <- function(block_name, block){
   return(begin_block)
 }
 
-make_yaml_block <- function(chapter_name){
+make_yaml_block <- function(chapter_name, chapter_file_path){
+    yaml_list <- get_yaml(chapter_file_path)
+    title <- yaml_list$title
+    description <- yaml_list$description
 
-  chapter_regex <- "chapter(\\d).md"
+      chapter_regex <- "chapter(\\d).md"
   id <- as.numeric(run_regex(chapter_name, chapter_regex))
   prev_id = id -1
   prev_id = paste0("/chapter", prev_id, ".md")
@@ -196,13 +203,15 @@ make_yaml_block <- function(chapter_name){
   next_id = id+1
   next_id = paste0("/chapter", next_id, ".md")
 
-  glue::glue("---\n","title: 'Chapter {id}:' \n",
-             "description: ''\n",
+
+  glue::glue("---\n","title: 'Chapter {id}: {title}' \n",
+             "description: '{description}'\n",
              "prev: {prev_id}\n",
              "next: {next_id}\n",
              "id: {id}\n",
              "type: chapter\n",
-             "---\n", id=id, prev_id=prev_id, next_id=next_id)
+             "---\n", id=id, prev_id=prev_id, next_id=next_id,
+             title = title,description = description)
 }
 
 
@@ -272,7 +281,7 @@ parse_exercise_list <- function(exercise_list){
 #' @export
 #'
 #' @examples
-save_exercise_list <- function(ex_list, chapter_name){
+save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
   ex_path <- "exercises"
   chapter_path <- "chapters"
   slides_path <- "slides"
@@ -296,7 +305,7 @@ save_exercise_list <- function(ex_list, chapter_name){
   })
 
   con = here(chapter_path, chapter_name)
-  yaml_block <- make_yaml_block(chapter_name)
+  yaml_block <- make_yaml_block(chapter_name, chapter_file_path)
   write(yaml_block, file=con, append=FALSE, sep="")
   lapply(out_list, write, file=con, append=TRUE, sep="")
 

@@ -69,7 +69,7 @@ exercise_list <- parse_exercise_list(test_list)
 exercise_list <- number_ex_list(exercise_list, basename = "01")
 
 #save the exercises and rewritten chapter.md
-save_exercise_list(exercise_list, "chapter1.md")
+save_exercise_list(exercise_list, "chapter1.md", paste0(repo_path, "/", "chapter1.md"))
 ```
 
 Exercises/solutions will be written to `exercises/` and the chapter.md files will be written to `chapters/`. 
