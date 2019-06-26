@@ -2,13 +2,21 @@
 % Please edit documentation in R/extract_chapters.R
 \name{get_chapters}
 \alias{get_chapters}
-\title{Title}
+\title{Loads chapters into memory from a DataCamp Repository}
 \usage{
 get_chapters(path)
 }
 \arguments{
-\item{path}{}
+\item{path}{- path to root path of DataCamp Repository}
+}
+\value{
+named list with each chapter.md file in a separate slot.
 }
 \description{
-Title
+Loads chapters into memory from a DataCamp Repository
+}
+\examples{
+chapter_file_path <- system.file("extdata/", package="decampr")
+chapter_list <- get_chapters(chapter_file_path)
+chapter_list[[1]]
 }

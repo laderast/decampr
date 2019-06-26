@@ -2,13 +2,27 @@
 % Please edit documentation in R/extract_chapters.R
 \name{parse_exercise_list}
 \alias{parse_exercise_list}
-\title{Title}
+\title{Parses exercise block into code chunks}
 \usage{
 parse_exercise_list(exercise_list)
 }
 \arguments{
 \item{exercise_list}{}
 }
+\value{
+list with each slot containing either type "multiple"
+or type "Normal" with the appropriate code chunks.
+}
 \description{
-Title
+Parses exercise block into code chunks
+}
+\examples{
+chapter_file_path <- system.file("extdata/", package="decampr")
+chapter_list <- get_chapters(chapter_file_path)
+exercise_list <- get_exercises(chapter_list[[1]])
+exercise_list <- parse_exercise_list(exercise_list)
+#show multiple exercise example
+exercise_list[[4]]
+#show normal exercise example
+exercise_list[[5]]
 }

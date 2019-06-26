@@ -45,14 +45,17 @@ get_hint <- function(text){
 }
 
 
-#' Title
+#' Loads chapters into memory from a DataCamp Repository
 #'
-#' @param path
+#' @param path - path to root path of DataCamp Repository
 #'
-#' @return
+#' @return named list with each chapter.md file in a separate slot.
 #' @export
 #'
 #' @examples
+#' chapter_file_path <- system.file("extdata/", package="decampr")
+#' chapter_list <- get_chapters(chapter_file_path)
+#' chapter_list[[1]]
 get_chapters <- function(path) {
   file_names <- list.files(path=path, pattern="chapter")
   file_list <- list.files(path = path, pattern = "chapter", full.names = TRUE)
@@ -151,10 +154,11 @@ get_yaml <- function(chapter_file_name){
   rmarkdown::yaml_front_matter(chapter_file_name)
 }
 
-#' Title
+#' Numbers an exercise list according to naming conventions
 #'
-#' @param exlist
-#' @param basename
+#' @param exlist exercise_list from parse_exercise_list
+#' @param prefix for exercises. Example: for chapter1.md, it should
+#' be "01"
 #'
 #' @return
 #' @export
@@ -256,14 +260,23 @@ make_multiple_block <- function(block_name, block){
   return(textblock)
 }
 
-#' Title
+#' Parses exercise block into code chunks
 #'
 #' @param exercise_list
 #'
-#' @return
+#' @return list with each slot containing either type "multiple"
+#' or type "Normal" with the appropriate code chunks.
 #' @export
 #'
 #' @examples
+#' chapter_file_path <- system.file("extdata/", package="decampr")
+#' chapter_list <- get_chapters(chapter_file_path)
+#' exercise_list <- get_exercises(chapter_list[[1]])
+#' exercise_list <- parse_exercise_list(exercise_list)
+#' #show multiple exercise example
+#' exercise_list[[4]]
+#' #show normal exercise example
+#' exercise_list[[5]]
 parse_exercise_list <- function(exercise_list){
   exercise_out_list <- lapply(names(exercise_list), function(x){
     out_list <- NULL
@@ -280,13 +293,14 @@ parse_exercise_list <- function(exercise_list){
 
 
 
-#' Given an exercise list and a chapter name, writes files.
+#' Given an exercise list and a chapter name, writes files to project directory
 #'
 #' @param ex_list
 #' @param chapter_name
 #'
 #' @return written exercises/solutions in `exercises/` and written chapter in `chapters/`
 #' @export
+#' @import here
 #'
 #' @examples
 save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
@@ -301,8 +315,10 @@ save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
     if(ex$type == "Normal"){
       ex_file_name <- paste0("exc_", x, ".R")
       solution_file_name <- paste0("solution_", x, ".R")
-      writeLines(as.character(ex$sample_code), con=here(ex_path, ex_file_name), sep="")
-      writeLines(as.character(ex$solution), con=here(ex_path, solution_file_name), sep="")
+      writeLines(as.character(ex$sample_code),
+                 con=here(ex_path, ex_file_name), sep="")
+      writeLines(as.character(ex$solution),
+                 con=here(ex_path, solution_file_name), sep="")
 
       out_block <- make_exercise_block(block_name = x, block=ex)
     }

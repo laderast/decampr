@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_chapters.R
 \name{save_exercise_list}
 \alias{save_exercise_list}
-\title{Given an exercise list and a chapter name, writes files.}
+\title{Given an exercise list and a chapter name, writes files to project directory}
 \usage{
 save_exercise_list(ex_list, chapter_name, chapter_file_path)
 }
@@ -13,5 +13,5 @@ save_exercise_list(ex_list, chapter_name, chapter_file_path)
 written exercises/solutions in `exercises/` and written chapter in `chapters/`
 }
 \description{
-Given an exercise list and a chapter name, writes files.
+Given an exercise list and a chapter name, writes files to project directory
 }

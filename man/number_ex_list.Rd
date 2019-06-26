@@ -2,13 +2,16 @@
 % Please edit documentation in R/extract_chapters.R
 \name{number_ex_list}
 \alias{number_ex_list}
-\title{Title}
+\title{Numbers an exercise list according to naming conventions}
 \usage{
 number_ex_list(exlist, basename = "01")
 }
 \arguments{
-\item{basename}{}
+\item{exlist}{exercise_list from parse_exercise_list}
+
+\item{prefix}{for exercises. Example: for chapter1.md, it should
+be "01"}
 }
 \description{
-Title
+Numbers an exercise list according to naming conventions
 }
