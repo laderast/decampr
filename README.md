@@ -28,7 +28,7 @@ remotes::install_github("laderast/decampr")
 success_msg("Great! You learned some basics about `data.frame`s! Let's move on.")
 test_function("colnames", incorrect_msg = "did you use colnames(gap1992)?")
 test_function("nrow", incorrect_msg = "did you use nrow(gap1992)")
-\\`\\`\\`
+`` ``` ``
               ## <- Note there are two line breaks, here
               ## <- and here!
 --- type:MultipleChoiceExercise lang:r xp:100 skills:1 key:d599f92ec8
