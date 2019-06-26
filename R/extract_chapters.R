@@ -1,3 +1,4 @@
+#' @export
 convert_to_unix_linebreaks <- function(text){
 
   gsub("\r", "", text)

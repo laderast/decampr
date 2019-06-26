@@ -4,7 +4,7 @@
 \alias{save_exercise_list}
 \title{Given an exercise list and a chapter name, writes files.}
 \usage{
-save_exercise_list(ex_list, chapter_name)
+save_exercise_list(ex_list, chapter_name, chapter_file_path)
 }
 \arguments{
 \item{chapter_name}{}
