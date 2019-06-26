@@ -12,3 +12,9 @@ get_exercises(chapter_file)
 \description{
 Title
 }
+\examples{
+chapter_file_path <- system.file("extdata/", package="decampr")
+chapter_list <- get_chapters(chapter_file_path)
+exercise_list <- get_exercises(chapter_list[[1]])
+exercise_list[[1]]
+}
