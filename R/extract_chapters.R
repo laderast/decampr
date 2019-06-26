@@ -5,12 +5,14 @@ convert_to_unix_linebreaks <- function(text){
 
 }
 
+#' @importFrom magrittr %>%
 run_regex <- function(text, regex){
 
   stringr::str_match_all(string = text, regex)[[1]] %>%
     data.frame() %>% pull(X2) %>% as.character()
 }
 
+#' @importFrom magrittr %>%
 run_regex_match <- function(text, regex){
   stringr::str_match_all(string=text, regex)[[1]]
 
@@ -129,8 +131,13 @@ extract_multiple_exercise <- function(text){
 #' @export
 #'
 #' @examples
+#' chapter_file_path <- system.file("extdata/", package="decampr")
+#' chapter_list <- get_chapters(chapter_file_path)
+#' exercise_list <- get_exercises(chapter_list[[1]])
+#' exercise_list[[1]]
 get_exercises <- function(chapter_file){
 
+  chapter_file <- convert_to_unix_linebreaks(chapter_file)
   exercise_name_regex <- "--- type:*.+[\\s\\S]*?\n"
   exercise_regex <-  "--- type:*.+Exercise*.+\n([\\s\\S]*?)\n\n\n"
   exercise_names <- run_regex_match(chapter_file, exercise_name_regex)
