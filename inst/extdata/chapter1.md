@@ -124,7 +124,6 @@ Based on the graph, map the appropriate variables to the `x`, and `y` aesthetics
 *** =hint
 Look at the graph. If you need the variable names, you can always use `head()` or `colnames()` on the `gap1992` dataset.
 
-
 *** =pre_exercise_code
 ```{r}
 library(dplyr)
