@@ -9,7 +9,7 @@ convert_to_unix_linebreaks <- function(text){
 run_regex <- function(text, regex){
 
   stringr::str_match_all(string = text, regex)[[1]] %>%
-    data.frame() %>% pull(X2) %>% as.character()
+    data.frame() %>% dplyr::pull(X2) %>% as.character()
 }
 
 #' @importFrom magrittr %>%
