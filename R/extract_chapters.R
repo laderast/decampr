@@ -261,10 +261,10 @@ parse_exercise_list <- function(exercise_list){
   exercise_out_list <- lapply(names(exercise_list), function(x){
     out_list <- NULL
     if(grepl("Normal",x, fixed=TRUE) | grepl("Tab", x, fixed=TRUE)){
-      out_list <- extract_normal_exercise(test_list[[x]])
+      out_list <- extract_normal_exercise(exercise_list[[x]])
     }
     if(grepl("Multiple", x, fixed=TRUE)){
-      out_list <- extract_multiple_exercise(test_list[[x]])
+      out_list <- extract_multiple_exercise(exercise_list[[x]])
     }
     return(out_list)
   })

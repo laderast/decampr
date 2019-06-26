@@ -28,7 +28,7 @@ remotes::install_github("laderast/decampr")
 success_msg("Great! You learned some basics about `data.frame`s! Let's move on.")
 test_function("colnames", incorrect_msg = "did you use colnames(gap1992)?")
 test_function("nrow", incorrect_msg = "did you use nrow(gap1992)")
-\`\`\`
+\\`\\`\\`
               ## <- Note there are two line breaks, here
               ## <- and here!
 --- type:MultipleChoiceExercise lang:r xp:100 skills:1 key:d599f92ec8
@@ -54,7 +54,7 @@ Now you can start processing your DataCamp repo:
 
 ``` r
 library(decampr)
-repo_path <- "c:/Code/RBootcamp-old"
+repo_path <- "c:/Code/RBootcamp_old"
 
 #get all chapters in the repo path
 chapter_list <- get_chapters(repo_path)
@@ -63,7 +63,7 @@ chapter_list <- get_chapters(repo_path)
 exercise_list <- get_exercises(chapter_list[[1]])
 
 #extract exercise information
-exercise_list <- parse_exercise_list(test_list)
+exercise_list <- parse_exercise_list(exercise_list)
 
 #number the exercises
 exercise_list <- number_ex_list(exercise_list, basename = "01")
