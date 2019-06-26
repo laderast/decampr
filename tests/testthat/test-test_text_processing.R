@@ -20,7 +20,7 @@ test_that("get_answer", {
 
 test_that("get_hint", {
   hint_text <- get_hint(exercise_list[[2]])
-  expect_equal("Look at the y-axis.\n\n", hint_text)
+  expect_equal("Look at the y-axis.", hint_text)
 })
 
 test_that("get_introduction", {
