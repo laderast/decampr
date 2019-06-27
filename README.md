@@ -59,8 +59,13 @@ repo_path <- "c:/Code/RBootcamp_old"
 #get all chapters in the repo path
 chapter_list <- get_chapters(repo_path)
 
+#Or, can just get a single chapter
+chapter1 <- get_chapter("c:/Code/RBootcamp_old/chapter1.md")
+
 #get all exercises for chapter 1
 exercise_list <- get_exercises(chapter_list[[1]])
+#could also run on chapter 1
+exercise_list <- get_exercises(chapter1)
 
 #extract exercise information
 exercise_list <- parse_exercise_list(exercise_list)

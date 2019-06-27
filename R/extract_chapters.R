@@ -89,12 +89,6 @@ get_sct <- function(text){
   return(sct)
 }
 
-get_hint <- function(text){
-  hint_regex <- "\\*\\*\\* \\=hint\n```\\{[a-z]\\}*\n([\\s\\S]*?){1}\n```"
-  hint <- run_regex(text, hint_regex)
-  return(hint)
-}
-
 extract_normal_exercise <- function(text){
   title <- get_title(text)
   instructions <- get_instructions(text)
@@ -148,6 +142,11 @@ get_exercises <- function(chapter_file){
   names(exercise_list) <- exercise_names
   exercise_list
 
+}
+
+get_chapter <- function(chapter_file_name){
+  out <- readr::read_file(chapter_file_name)
+  out
 }
 
 get_yaml <- function(chapter_file_name){
