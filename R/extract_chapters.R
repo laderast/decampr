@@ -203,6 +203,10 @@ make_exercise_block <- function(block_name, block){
  ex_id = block_name, title = block$title,
  introduction = block$introduction)
 
+  if(grepl(pattern = "pre_exercise", block$hint)){
+    block$hint <- ""
+  }
+
   if(length(block$hint)>0 | block$hint != ""){
     hint_block <- glue::glue('{hint}\n',hint=block$hint)
     begin_block <- paste(begin_block, hint_block, sep="")
