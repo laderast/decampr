@@ -328,11 +328,13 @@ save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
     if(ex$type == "Normal"){
       ex_file_name <- paste0("exc_", x, ".R")
       solution_file_name <- paste0("solution_", x, ".R")
+      pre_ex_name <- paste0("pre_exercise_", x, ".R")
       writeLines(as.character(ex$sample_code),
                  con=here(ex_path, ex_file_name), sep="")
       writeLines(as.character(ex$solution),
                  con=here(ex_path, solution_file_name), sep="")
-
+      writeLines(as.character(ex$pre_exercise),
+                 con=here(ex_path, pre_ex_name), sep="")
       out_block <- make_exercise_block(block_name = x, block=ex)
     }
     if(ex$type == "Multiple"){
