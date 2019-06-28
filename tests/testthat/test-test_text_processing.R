@@ -61,4 +61,6 @@ test_that("make_yaml_block", {
   out <- make_yaml_block("chapter1.md", system.file("extdata/chapter1.md", package="decampr"))
 })
 
+test_that("make_exercise_block",{
 
+})

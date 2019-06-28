@@ -2,6 +2,7 @@
 
 export("%>%")
 export(convert_to_unix_linebreaks)
+export(get_chapter)
 export(get_chapters)
 export(get_exercises)
 export(number_ex_list)
