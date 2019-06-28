@@ -219,10 +219,10 @@ make_yaml_block <- function(chapter_name, chapter_file_path){
       chapter_regex <- "chapter(\\d).md"
   id <- as.numeric(run_regex(chapter_name, chapter_regex))
   prev_id = id -1
-  prev_id = paste0("/chapter", prev_id, ".md")
-  if(prev_id == "/chapter0.md"){prev_id <- "null"}
+  prev_id = paste0("/chapter", prev_id)
+  if(prev_id == "/chapter0"){prev_id <- "null"}
   next_id = id+1
-  next_id = paste0("/chapter", next_id, ".md")
+  next_id = paste0("/chapter", next_id)
 
 
   glue::glue("---\n","title: 'Chapter {id}: {title}' \n",
