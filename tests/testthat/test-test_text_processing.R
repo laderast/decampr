@@ -23,6 +23,10 @@ test_that("get_answer", {
 test_that("get_hint", {
   hint_text <- get_hint(exercise_list[[2]])
   expect_equal("Look at the y-axis.", hint_text)
+
+  hint_text <- "*** =instructions\nJust move on to the next exercise! (CTRL+K)\n*** =hint\n\n*** =pre_exercise_code"
+  ex_text <- decampr:::get_hint(hint_text)
+  expect_equal(length(ex_text), 0)
 })
 
 
