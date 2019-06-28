@@ -38,7 +38,7 @@ get_instructions <- function(text){
 
 
 get_hint <- function(text){
-  instructions_regex <- "\\*\\*\\* \\=hint\n([\\s\\S]*?)\n\\*\\*\\*"
+  instructions_regex <- "\\*\\*\\* \\=hint\n([\\s\\S]*?)\n\n\\*\\*\\* \\="
 
   instructions <- run_regex(text, instructions_regex)
   return(instructions)
