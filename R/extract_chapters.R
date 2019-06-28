@@ -97,6 +97,9 @@ extract_normal_exercise <- function(text){
   solution <- get_solution(text)
   introduction <- get_introduction(text)
   hint <- get_hint(text)
+  if(length(hint)==0){
+    hint <- ""
+  }
   out_list <- list(title = title, introduction=introduction,
                    instructions=instructions,
                    pre_exercise=pre_exercise,
@@ -112,6 +115,9 @@ extract_multiple_exercise <- function(text){
   instructions <- get_instructions(text)
   sct <- get_sct(text)
   hint <- get_hint(text)
+  if(length(hint)==0){
+    hint <- ""
+  }
   introduction <- get_introduction(text)
   out_list <- list(title = title, introduction = introduction,
                    instructions=instructions, sct=sct,
