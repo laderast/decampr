@@ -1,7 +1,7 @@
 library(here)
 #source(here("R/extract_chapters.R"))
 chapter_file <- readr::read_file(system.file("extdata/chapter1.md", package="decampr"))
-chapter_file <- convert_to_unix_linebreaks(chapter_file)
+chapter_file <- decampr:::convert_to_unix_linebreaks(chapter_file)
 exercise_list <- get_exercises(chapter_file)
 exercise_text <- "## Thinking about aesthetics\nNow that we've learned a little about the `data.frame`, we can get to the fun part: making graphs.\n\nThe first thing we are going to is think about how we represent variables in a plot. \n\nHow do we visually represent a variable in our dataset? Take a look at this graph. What variable is mapped to `y`, and what is mapped to `x`, and what is mapped to `color`?\n\n***=pre_exercise_code\n```{r}\nlibrary(dplyr)\nlibrary(gapminder)\nlibrary(ggplot2)\ngap1992 <- gapminder %>% filter(year == 1992)\n\nggplot(gap1992, aes(x = log(gdpPercap), y = lifeExp, size=pop, color=continent)) +\n  geom_point() + ggtitle(\"Gapminder for 1992\")\n```\n\n*** =instructions\n- x = gdpPercap, y = log(lifeExp), color = continent\n- x = continent, y = year, color = pop\n- y = lifeExp, x = log(gdpPercap), color = continent\n\n*** =hint\nLook at the y-axis.\n\n*** =sct\n```{r}\nmsg1 = \"You have things reversed, and you're taking the log of the wrong variable\"\nmsg2 = \"Wrong variables. Go back and look at what's being mapped\"\nmsg3 = \"Correct! We are displaying lifeExp as our y variable and log(gdpPercap) as our x variable\"\n\ntest_mc(correct = 3, feedback_msgs=c(msg1, msg2, msg3))\n```"
 
