@@ -334,14 +334,14 @@ save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
 
     if(ex$type == "Normal"){
       write(as.character(ex$pre_exercise),
-                 con=here(ex_path, ex_file_name), sep="", append=FALSE)
+                 file=here(ex_path, ex_file_name), sep="", append=FALSE)
       write(as.character(ex$sample_code),
-                 con=here(ex_path, ex_file_name), append=TRUE, sep="")
+                 file=here(ex_path, ex_file_name), append=TRUE, sep="")
 
       write(as.character(ex$pre_exercise),
-            con=here(ex_path, solution_file_name), sep="", append=FALSE)
+            file=here(ex_path, solution_file_name), sep="", append=FALSE)
       write(as.character(ex$solution),
-                 con=here(ex_path, solution_file_name), sep="", append=TRUE)
+                 file=here(ex_path, solution_file_name), sep="", append=TRUE)
 
       out_block <- make_exercise_block(block_name = x, block=ex)
     }
