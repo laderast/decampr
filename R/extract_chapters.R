@@ -200,7 +200,7 @@ make_exercise_block <- function(block_name, block){
   '<codeblock id="{ex_id}">\n',
  instructions=block$instructions,id = block$id,
  ex_id = block_name, title = block$title, introduction = block$introduction)
-  if(length(block$hint)>0 | block$hint = ""){
+  if(length(block$hint)>0 | block$hint == ""){
   begin_block <- glue::glue(begin_block, '{hint}\n',hint=block$hint)
   }
   begin_block <- paste(begin_block, '</codeblock></exercise>\n', sep="\n")
