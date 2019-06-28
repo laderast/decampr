@@ -150,6 +150,7 @@ get_exercises <- function(chapter_file){
 
 }
 
+#' @export
 get_chapter <- function(chapter_file_name){
   out <- readr::read_file(chapter_file_name)
   out
@@ -199,9 +200,12 @@ make_exercise_block <- function(block_name, block){
   '{instructions}\n\n',
   '<codeblock id="{ex_id}">\n',
  instructions=block$instructions,id = block$id,
- ex_id = block_name, title = block$title, introduction = block$introduction)
+ ex_id = block_name, title = block$title,
+ introduction = block$introduction)
+
   if(length(block$hint)>0 | block$hint != ""){
-  begin_block <- glue::glue(begin_block, '{hint}\n',hint=block$hint)
+    hint_block <- glue::glue('{hint}\n',hint=block$hint)
+    begin_block <- paste(begin_block, hint_block, sep="")
   }
   begin_block <- paste(begin_block, '</codeblock></exercise>\n', sep="\n")
   return(begin_block)
