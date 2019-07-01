@@ -208,10 +208,10 @@ make_exercise_block <- function(block_name, block){
   }
 
   if(length(block$hint)>0 | block$hint != ""){
-    hint_block <- glue::glue('{hint}\n',hint=block$hint)
-    begin_block <- paste(begin_block, hint_block, sep="")
+    hint_block <- glue::glue('{hint}',hint=block$hint)
+    begin_block <- paste(begin_block, hint_block, sep="\n")
   }
-  begin_block <- paste(begin_block, '</codeblock></exercise>\n', sep="\n")
+  begin_block <- paste(begin_block, '</codeblock></exercise>\n', sep="")
   return(begin_block)
 }
 
@@ -230,7 +230,7 @@ make_yaml_block <- function(chapter_name, chapter_file_path){
 
 
   glue::glue("---\n","title: 'Chapter {id}: {title}' \n",
-             "description: '{description}'\n",
+             "description: {description}\n",
              "prev: {prev_id}\n",
              "next: {next_id}\n",
              "id: {id}\n",
