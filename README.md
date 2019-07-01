@@ -89,7 +89,7 @@ Exercises/solutions/pre-exercise code will be written to `exercises/` and the ch
 
 Note that submission correctness tests are not currently captured, nor is the correct answer to the multiple choice exercise captured. The correct answer can be added to that exercise by editing the appropriate `chapter.md` file (see Ines` documentation for more info).
 
-## Some functions for editing individual exercises
+## Editing Individual Exercises
 
 The `open_exercise()` function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the `03_03` exercise, solutions, and prexercise code (which would be `exercises/exc_03_03.R`, `exercises/solution_03_03.R` and `exercises/preexercise_03_03.R`), I could use:
 
