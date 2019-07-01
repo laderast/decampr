@@ -94,7 +94,7 @@ Note that submission correctness tests are not currently captured, nor is the co
 The `open_exercise()` function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the `03_03` exercise, solutions, and prexercise code (which would be `exercises/exc_03_03.R`, `exercises/solution_03_03.R` and `exercises/preexercise_03_03.R`), I could use:
 
 ```r
-open_exercises("03_03")
+open_exercise("03_03")
 ```
 
 And edit windows for each of these files would pop up.
