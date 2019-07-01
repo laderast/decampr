@@ -360,5 +360,37 @@ save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
 }
 
 
+#' Opens exercise files for editing
+#'
+#' @param id - id of the exercise/solution/pre-exercise (such as "01_02)
+#' @param create - boolean. If FALSE, won't create the relevant files and returns NULL.
+#' If TRUE, then will create files in exercises directory
+#'
+#' @return opens exercise files
+#' @export
+#'
+#' @examples
+open_exercise <- function(id, create=FALSE){
+  exercise_path <- "exercises"
+  exercise_file <- paste0("exc_", id, ".R")
+  solution_file <- paste0("solution_", id, ".R")
+  pre_exercise_file <- paste0("preexercise_", id, ".R")
 
+  ex_location <- here::here(exercise_path, exercise_file)
+
+  if(file.exists(ex_location)| create == TRUE){
+    usethis::edit_file(ex_location)
+  }
+
+  sol_location <- here::here(exercise_path, solution_file)
+  if(file.exists(sol_location) | create == TRUE){
+    usethis::edit_file(sol_location)
+  }
+
+  pre_location <- here::here(exercise_path, pre_exercise_file)
+  if(file.exists(pre_location) | create == TRUE){
+    usethis::edit_file(pre_location)
+  }
+
+}
 

@@ -85,9 +85,19 @@ exercise_list <- number_ex_list(exercise_list, basename = "01")
 save_exercise_list(exercise_list, "chapter1.md", paste0(repo_path, "/", "chapter1.md"))
 ```
 
-Exercises/solutions will be written to `exercises/` and the chapter.md files will be written to `chapters/`. 
+Exercises/solutions/pre-exercise code will be written to `exercises/` and the chapter.md files will be written to `chapters/`. 
 
 Note that submission correctness tests are not currently captured, nor is the correct answer to the multiple choice exercise captured. The correct answer can be added to that exercise by editing the appropriate `chapter.md` file (see Ines` documentation for more info).
+
+## Some functions for editing individual exercises
+
+The `open_exercise()` function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the `03_03` exercise, solutions, and prexercise code (which would be `exercises/exc_03_03.R`, `exercises/solution_03_03.R` and `exercises/preexercise_03_03.R`), I could use:
+
+```r
+open_exercises("03_03")
+```
+
+And edit windows for each of these files would pop up.
 
 ## Acknowledgements
 
