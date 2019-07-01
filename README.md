@@ -36,19 +36,27 @@ test_function("nrow", incorrect_msg = "did you use nrow(gap1992)")
 Now that we've learned a little about the `data.frame`, we can get to the fun part: making graphs.
 ```
 
+Comments should not have whitespace after the `#`:
+
+```
+##proper comment
+
+## improper comment (will be parsed incorrectly)
+```
+
 Also, make sure the last exercise in your chapter has at least two linebreaks and is followed by a `---`.
 
 ## Using `decampr`
 
 `decampr` assumes that your datacamp repo is local to your system.
 
-The first thing to do is to use `usethis::create_from_github()` to clone Ines' basic course repository
+The first thing to do is to use `usethis::create_from_github()` from the `usethis` package to clone Ines' basic course repository to your computer:
 
 ```r
 usethis::create_from_github("ines/course-starter-r")
 ```
 
-This will clone the repo to your computer (by default, it saves it to your Desktop) and open up a new project with your cloned repo.
+This will clone the `course-starter-r` repo to your computer (by default, it saves it to your Desktop) and open up a new project with your cloned repo.
 
 Now you can start processing your DataCamp repo:
 
@@ -79,7 +87,11 @@ save_exercise_list(exercise_list, "chapter1.md", paste0(repo_path, "/", "chapter
 
 Exercises/solutions will be written to `exercises/` and the chapter.md files will be written to `chapters/`. 
 
-Note that submission correctness tests are not currently captured, nor is the correct answer to the multiple choice exercise captured. The correct answer can be added to that exercise by editing the appropriate `chapter.md` file.
+Note that submission correctness tests are not currently captured, nor is the correct answer to the multiple choice exercise captured. The correct answer can be added to that exercise by editing the appropriate `chapter.md` file (see Ines` documentation for more info).
+
+## Acknowledgements
+
+Thank you so much to Ines Montani for making such a great alternative to DataCamp lessons. Also, thank you to Noam Ross for his [GAMs in R course](https://github.com/noamross/gams-in-r-course/), which helped me understand the structure of the lesson framework and how I needed to parse the DataCamp format.
 
 ## Contributing
 
