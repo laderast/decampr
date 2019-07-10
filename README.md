@@ -99,6 +99,19 @@ open_exercise("03_03")
 
 And edit windows for each of these files would pop up.
 
+
+## Adding an exercise to the end of your chapter
+
+If you want to expand on your work, there is another convenience function called `add_exercise()`:
+
+```r
+add_exercise("chapter1.md", "01_10")
+```
+
+Which will add a new set of HTML exercise tags for your exercise to your `chapter1.md` file, and will open this file for further editing. Furthermore, the exercise, solution, and pre-exercise files will be open.
+
+Note that if you already have a codeblock with that id, function will return an error, preventing you from overwriting the files.
+
 ## Acknowledgements
 
 Thank you so much to Ines Montani for making such a great alternative to DataCamp lessons. Also, thank you to Noam Ross for his [GAMs in R course](https://github.com/noamross/gams-in-r-course/), which helped me understand the structure of the lesson framework and how I needed to parse the DataCamp format.
