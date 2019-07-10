@@ -305,6 +305,21 @@ parse_exercise_list <- function(exercise_list){
 }
 
 
+make_exercise_path_files <- function(exercise_name){
+  x <- exercise_name
+  ex_file_name <- paste0("exc_", x, ".R")
+  solution_file_name <- paste0("solution_", x, ".R")
+  pre_ex_name <- paste0("preexercise_", x, ".R")
+
+  ex_file_path <- here("exercises", ex_file_name)
+  solution_file_path <- here("exercises", solution_file_name)
+  pre_ex_path <- here("exercises", pre_ex_name)
+
+  return(list(exercise_file = ex_file_path,
+              solution_file = solution_file_path,
+              pre_ex_file = pre_ex_path))
+}
+
 
 #' Given an exercise list and a chapter name, writes files to project directory
 #'
@@ -325,23 +340,25 @@ save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
     print(x)
     out_block <- NULL
     ex <- ex_list[[x]]
-    ex_file_name <- paste0("exc_", x, ".R")
-    solution_file_name <- paste0("solution_", x, ".R")
-    pre_ex_name <- paste0("preexercise_", x, ".R")
+    file_list <- make_exercise_path_files(x)
+
+    ex_file_name <- file_list$exercise_file
+    solution_file_name <- file_list$solution_file
+    pre_ex_name <- file_list$pre_ex_file
 
     writeLines(as.character(ex$pre_exercise),
-               con=here(ex_path, pre_ex_name), sep="")
+               con=pre_ex_name, sep="")
 
     if(ex$type == "Normal"){
       write(as.character(ex$pre_exercise),
-                 file=here(ex_path, ex_file_name), sep="", append=FALSE)
+                 file=ex_file_name, sep="", append=FALSE)
       write(as.character(ex$sample_code),
-                 file=here(ex_path, ex_file_name), append=TRUE, sep="")
+                 file=ex_file_name, append=TRUE, sep="")
 
       write(as.character(ex$pre_exercise),
-            file=here(ex_path, solution_file_name), sep="", append=FALSE)
+            file=solution_file_name, sep="", append=FALSE)
       write(as.character(ex$solution),
-                 file=here(ex_path, solution_file_name), sep="", append=TRUE)
+                 file=solution_file_name, sep="", append=TRUE)
 
       out_block <- make_exercise_block(block_name = x, block=ex)
     }
@@ -392,5 +409,15 @@ open_exercise <- function(id, create=FALSE){
     usethis::edit_file(pre_location)
   }
 
+}
+
+open_chapter <- function(chapter_file_name){
+  chapter_path <- here("chapters", chapter_file_name)
+
+  if(!file.exists(chapter_path)){
+    stop("Your chapter file isn't made yet - use add_chapter() to add it")
+  }
+
+  usethis::edit_file(chapter_path)
 }
 

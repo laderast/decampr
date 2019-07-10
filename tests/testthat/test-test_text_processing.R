@@ -64,3 +64,30 @@ test_that("make_yaml_block", {
 test_that("make_exercise_block",{
 
 })
+
+chapter_file <- readr::read_file(system.file("extdata/chapter5.md", package="decampr"))
+chapter_file <- decampr:::convert_to_unix_linebreaks(chapter_file)
+exercise_list <- get_exercises(chapter_file)
+ex_list <- parse_exercise_list(exercise_list)
+ex_list <- number_ex_list(ex_list)
+
+test_that("get_id_list", {
+          expect_error(get_id_list("blah"))
+        expect_error(get_id_list(system.file("chapters/chapter1.md",
+                          package="decampr")))
+          #expect_equal(9, length(id_list))
+  })
+
+
+test_that("make_chapter", {
+
+})
+
+test_that("init_exercise_block",{
+  test_text <- "<exercise id=\"3\" title=\"\">\n\nadd exercise text here\n\n## Instructions\n\n\n<codeblock id=\"01_03\">\n</codeblock>\n</exercise>\n\n"
+  expect_equal(init_exercise_block("01_03"), test_text)
+})
+
+test_that("make_exercise", {
+
+})
