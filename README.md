@@ -99,6 +99,19 @@ open_exercise("03_03")
 
 And edit windows for each of these files would pop up.
 
+## Adding a new chapter file.
+
+We've got you covered. You can use `add_chapter()` to initialize a new chapter file and open it automatically.
+
+Say I wanted to add a new `chapter6.md` to my course. I can use
+
+```r
+add_chapter("chapter6.md")
+```
+
+And this file will be created, along with the relevant YAML to get the course to work.
+
+I can then start adding exercises using the `add_exercise()` function (see below).
 
 ## Adding an exercise to the end of your chapter
 
@@ -111,6 +124,9 @@ add_exercise("chapter1.md", "01_10")
 Which will add a new set of HTML exercise tags for your exercise to your `chapter1.md` file, and will open this file for further editing. Furthermore, the exercise, solution, and pre-exercise files will be open.
 
 Note that if you already have a codeblock with that id, function will return an error, preventing you from overwriting the files.
+
+## TODO: add_multiple_choice()
+## TODO: add_slides()
 
 ## Acknowledgements
 
