@@ -434,8 +434,8 @@ open_exercise <- function(id, create=FALSE){
 
 }
 
-open_chapter <- function(chapter_file_name){
-  chapter_path <- here("chapters", chapter_file_name)
+open_chapter <- function(chapter_name){
+  chapter_path <- here("chapters", chapter_name)
 
   if(!file.exists(chapter_path)){
     stop("Your chapter file isn't made yet - use add_chapter() to add it")

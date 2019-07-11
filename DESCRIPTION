@@ -1,5 +1,5 @@
 Package: decampr
-Title: What the Package Does (One Line, Title Case)
+Title: Converts the DataCamp Lesson format to Ines Montani's open course format.
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Ted",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "tedladeras@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: "`decampr` consists of some simple utilities to process R-based DataCamp lessons to Ines Montani's Gatsby/Binder based course setup available here: https://github.com/ines/course-starter-r `decampr` speeds up building these courses by parsing the DataCamp format and outputting the correct files (chapter.mds, exercises, solutions, and multiple choice questions)."
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

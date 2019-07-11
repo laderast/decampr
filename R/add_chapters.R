@@ -1,5 +1,22 @@
-add_chapter <- function(chapter_name){
 
+#' Add a new chapter file to your course
+#'
+#' @param chapter_name - the new chapter name, such as "chapter2.md"
+#'
+#' @return the new chapter file with YAML, which is saved in `chapters/`. RStudio
+#' will open the file for editing.
+#' @export
+#'
+#' @examples
+add_chapter <- function(chapter_name){
+  chapter_file_path <- here::here("chapters", chapter_name)
+  if(file.exists(chapter_file_path)){
+    stop("chapter already exists - you can use open_chapter('chapter.md') to open it")
+  }
+
+  yaml <- make_yaml_block(chapter_name, chapter_file_path = NULL)
+  write(yaml, file=chapter_file_path,append = FALSE)
+  open_chapter(chapter_name)
 
 }
 

@@ -83,8 +83,7 @@ test_that("get_id_list", {
   })
 
 
-test_that("make_chapter", {
-
+test_that("add_chapter", {
 })
 
 test_that("init_exercise_block",{
