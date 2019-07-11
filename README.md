@@ -126,7 +126,12 @@ Which will add a new set of HTML exercise tags for your exercise to your `chapte
 Note that if you already have a codeblock with that id, function will return an error, preventing you from overwriting the files.
 
 ## TODO: add_multiple_choice()
+
+Coming soon!
+
 ## TODO: add_slides()
+
+Coming soon!
 
 ## Acknowledgements
 
