@@ -215,12 +215,35 @@ make_exercise_block <- function(block_name, block){
   return(begin_block)
 }
 
+#' Read and write an appropriate YAML block
+#'
+#' @param chapter_name - chapter name without full path, such as "chapter1.md"
+#' @param chapter_file_path - full file path to the chapter.md file in the
+#' DataCamp repository, such as "c:/Code/RBootcamp_old/". Set this argument
+#' to NULL if you don't have a chapter heading.
+#'
+#' @return yaml block as a glue class
+#'
+#' @examples
+#'
+#' make_yaml_block("chapter1.md", chapter_file_path = NULL)
+#'
+#' make_yaml_block("chapter1.md, chapter_file_path =
+#'          system.file("extdata/chapter1.md", package="decampr"))
 make_yaml_block <- function(chapter_name, chapter_file_path){
+
+  title <- "Add your chapter title here"
+  description <- "Add your description here"
+
+  if(!is.null(chapter_file_path)){
     yaml_list <- get_yaml(chapter_file_path)
     title <- yaml_list$title
     description <- yaml_list$description
+  }
 
-      chapter_regex <- "chapter(\\d).md"
+  #get the chapter number and use it to calculate previous
+  #and next chapter names
+  chapter_regex <- "chapter(\\d).md"
   id <- as.numeric(run_regex(chapter_name, chapter_regex))
   prev_id = id -1
   prev_id = paste0("/chapter", prev_id)
@@ -228,7 +251,7 @@ make_yaml_block <- function(chapter_name, chapter_file_path){
   next_id = id+1
   next_id = paste0("/chapter", next_id)
 
-
+  #return the new yaml
   glue::glue("---\n","title: 'Chapter {id}: {title}' \n",
              "description: {description}\n",
              "prev: {prev_id}\n",

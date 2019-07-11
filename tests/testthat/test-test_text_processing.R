@@ -58,7 +58,11 @@ test_that("number_ex_list", {
 })
 
 test_that("make_yaml_block", {
+  test <- readr::read_file(system.file("extdata/chapter1.yml", package="decampr"))
+  test <- decampr::convert_to_unix_linebreaks(test)
   out <- make_yaml_block("chapter1.md", system.file("extdata/chapter1.md", package="decampr"))
+  out <- paste0(as.character(out), "\n")
+  expect_equal(test, out)
 })
 
 test_that("make_exercise_block",{
