@@ -58,15 +58,16 @@ extract_numeric_id <- function(exercise_id){
   return(out_id)
 }
 
-init_exercise_block <- function(exercise_id){
+init_exercise_block <- function(exercise_id,
+                                title="Add your exercise title here"){
   parsed_id <- extract_numeric_id(exercise_id)
 
   begin_block <- glue::glue(
-    '<exercise id="{parsed_id}" title="">\n\n',
+    '<exercise id="{parsed_id}" title="{title}">\n\n',
     'add exercise text here\n\n',
     '## Instructions\n\n\n',
     '<codeblock id="{exercise_id}">\n',
-    exercise_id = exercise_id, parsed_id=parsed_id)
+    exercise_id = exercise_id, parsed_id=parsed_id, title=title)
 
   finish_block <- "\n</codeblock>\n</exercise>\n\n"
 

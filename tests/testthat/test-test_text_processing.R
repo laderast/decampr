@@ -87,8 +87,8 @@ test_that("add_chapter", {
 })
 
 test_that("init_exercise_block",{
-  test_text <- "<exercise id=\"3\" title=\"\">\n\nadd exercise text here\n\n## Instructions\n\n\n<codeblock id=\"01_03\">\n</codeblock>\n</exercise>\n\n"
-  expect_equal(init_exercise_block("01_03"), test_text)
+  test_text <- "<exercise id=\"3\" title=\"Add your exercise title here\">\n\nadd exercise text here\n\n## Instructions\n\n\n<codeblock id=\"01_03\">\n</codeblock>\n</exercise>\n\n"
+  expect_equal(as.character(init_exercise_block("01_03")), test_text)
 })
 
 test_that("make_exercise", {
