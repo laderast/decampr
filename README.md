@@ -3,7 +3,10 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-`decampr` consists of some simple utilities to process R-based DataCamp lessons to Ines Montani's Gatsby/Binder based course setup available here: https://github.com/ines/course-starter-r 
+`decampr` consists of some simple utilities to:
+
+1. process R-based DataCamp lessons to Ines Montani's Gatsby/Binder based course setup available here: https://github.com/ines/course-starter-r 
+2. Start a course from scratch with some convenience functions to create and update content.
 
 `decampr` speeds up building these courses by parsing the DataCamp format and outputting the correct files (chapter.mds, exercises, solutions, and multiple choice questions).   
 
@@ -23,25 +26,25 @@ remotes::install_github("laderast/decampr")
 `decampr` is based on some rather fragile regular expressions, particularly for extracting the exercise code. It assumes that you have at least two linebreaks separating each exercise. That is:
 
 ```
-*** =sct
-```{r}
+\*\*\* =sct
+\`\`\`{r}
 success_msg("Great! You learned some basics about `data.frame`s! Let's move on.")
 test_function("colnames", incorrect_msg = "did you use colnames(gap1992)?")
 test_function("nrow", incorrect_msg = "did you use nrow(gap1992)")
 `` ``` ``
-              ## <- Note there are two line breaks, here
-              ## <- and here!
+              \#\# <- Note there are two line breaks, here
+              \#\# <- and here!
 --- type:MultipleChoiceExercise lang:r xp:100 skills:1 key:d599f92ec8
-## Thinking about aesthetics
+\#\# Thinking about aesthetics
 Now that we've learned a little about the `data.frame`, we can get to the fun part: making graphs.
 ```
 
 Comments should not have whitespace after the `#`:
 
 ```
-##proper comment
+\#\#proper comment
 
-## improper comment (will be parsed incorrectly)
+\#\# improper comment (will be parsed incorrectly)
 ```
 
 Also, make sure the last exercise in your chapter has at least two linebreaks and is followed by a `---`.
