@@ -1,3 +1,9 @@
+get_last_exercise <- function(){
+
+}
+
+get_position_of_exercise <- function(){}
+
 
 #' Add a new chapter file to your course
 #'

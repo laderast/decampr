@@ -126,7 +126,7 @@ extract_multiple_exercise <- function(text){
 }
 
 
-#' Title
+#' Extracts exercises from a DataCamp chapter
 #'
 #' @param chapter_file
 #'
