@@ -16,18 +16,57 @@ create_lesson_repo <- function(destdir = NULL) {
 }
 
 
+#' Adds a data object to both the master and binder branch
+#'
+#' @param dataobj - a data object, usually a tibble or data.frame
+#'
+#' @return added and committed objects to both the binder and test branches
+#' @export
+#'
+#' @examples
 add_data_to_lesson <- function(dataobj){
-  git2r::branches()
+  current_branch <- get_branch_head()
+
+  #check and make sure we're on master first
+  if(current_branch != "master"){
+    git2r::checkout(branch="master")
+  }
+
+  data_obj_name <- deparse(substitute(dataobj))
+  msg <- paste("Adding", data_obj_name, "to master branch")
+
   usethis::use_data(dataobj)
-  git2r::commit()
+  git2r::commit(message=msg)
+
   git2r::checkout(branch = "binder")
   usethis::use_data(dataobj)
-  data_obj_name <- deparse(substitute(dataobj))
-  git2r::commit(message=paste("Adding", data_obj_name, "to binder branch")))
-  usethis::ui_done("")
+
+  msg <- paste("Adding", data_obj_name, "to binder branch")
+  git2r::commit(message=msg)
+
+  git2r::checkout(branch="master")
+  usethis::ui_done("Added your object to both binder and master branches")
+}
+
+get_branch_head <- function(){
+  branches <- git2r::branches(flags="local")
+  branch_stat <- unlist(lapply(branches, git2r::is_head))
+  head_branch <- names(which(branch_stat))
+  return(head_branch)
 }
 
 test_exercise <- function(exercise_number){
+  list.files("exercises",pattern = exercise_number)
 
-  source()
+  try{
+  source(here())
+  }
+}
+
+#need function to source a file and return its error
+#this is from https://stackoverflow.com/questions/5218945/using-trycatch-and-source
+sources_correctly <- function(file)
+{
+  fn <- try(source(file))
+  !inherits(fn, "try-error")
 }

@@ -18,7 +18,8 @@ Imports:
     rmarkdown,
     dplyr,
     usethis,
-    magrittr
+    magrittr,
+    git2r
 Suggests: 
     testthat (>= 2.1.0),
     knitr
