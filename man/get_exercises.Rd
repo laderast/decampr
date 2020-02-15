@@ -9,6 +9,9 @@ get_exercises(chapter_file)
 \arguments{
 \item{chapter_file}{}
 }
+\value{
+
+}
 \description{
 Title
 }

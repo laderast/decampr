@@ -12,6 +12,9 @@ number_ex_list(exlist, basename = "01")
 \item{prefix}{for exercises. Example: for chapter1.md, it should
 be "01"}
 }
+\value{
+
+}
 \description{
 Numbers an exercise list according to naming conventions
 }
