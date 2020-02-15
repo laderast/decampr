@@ -56,11 +56,14 @@ get_branch_head <- function(){
 }
 
 test_exercise <- function(exercise_number){
-  list.files("exercises",pattern = exercise_number)
+  ex_files <- list.files("exercises",pattern = exercise_number)
 
-  try{
-  source(here())
-  }
+  source_list <- sapply(ex_files, sources_correctly)
+  names(source_list) <- ex_files
+
+  failed_files <- names(which(source_list))
+
+  ui_done("The following files did not run correctly")
 }
 
 #need function to source a file and return its error
