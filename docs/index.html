@@ -113,48 +113,48 @@ Now that we've learned a little about the `data.frame`, we can get to the fun pa
 <a class="sourceLine" id="cb5-2" data-line-number="2">repo_path &lt;-<span class="st"> "c:/Code/RBootcamp_old"</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#get all chapters in the repo path</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">chapter_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/get_chapters.html">get_chapters</a></span>(repo_path)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">chapter_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_chapters.html">get_chapters</a></span>(repo_path)</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#Or, can just get a single chapter</span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">chapter1 &lt;-<span class="st"> </span><span class="kw">get_chapter</span>(<span class="st">"c:/Code/RBootcamp_old/chapter1.md"</span>)</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#get all exercises for chapter 1</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/get_exercises.html">get_exercises</a></span>(chapter_list[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_exercises.html">get_exercises</a></span>(chapter_list[[<span class="dv">1</span>]])</a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#could also run on chapter 1</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/get_exercises.html">get_exercises</a></span>(chapter1)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_exercises.html">get_exercises</a></span>(chapter1)</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#extract exercise information</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/parse_exercise_list.html">parse_exercise_list</a></span>(exercise_list)</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/parse_exercise_list.html">parse_exercise_list</a></span>(exercise_list)</a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#number the exercises</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/number_ex_list.html">number_ex_list</a></span>(exercise_list, <span class="dt">basename =</span> <span class="st">"01"</span>)</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/number_ex_list.html">number_ex_list</a></span>(exercise_list, <span class="dt">basename =</span> <span class="st">"01"</span>)</a>
 <a class="sourceLine" id="cb5-20" data-line-number="20"></a>
 <a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#save the exercises and rewritten chapter.md</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/save_exercise_list.html">save_exercise_list</a></span>(exercise_list, <span class="st">"chapter1.md"</span>, <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(repo_path, <span class="st">"/"</span>, <span class="st">"chapter1.md"</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="kw"><a href="reference/save_exercise_list.html">save_exercise_list</a></span>(exercise_list, <span class="st">"chapter1.md"</span>, <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(repo_path, <span class="st">"/"</span>, <span class="st">"chapter1.md"</span>))</a></code></pre></div>
 <p>Exercises/solutions/pre-exercise code will be written to <code>exercises/</code> and the chapter.md files will be written to <code>chapters/</code>.</p>
 <p>Note that submission correctness tests are not currently captured, nor is the correct answer to the multiple choice exercise captured. The correct answer can be added to that exercise by editing the appropriate <code>chapter.md</code> file (see Ines` documentation for more info).</p>
 </div>
 <div id="editing-individual-exercises" class="section level2">
 <h2 class="hasAnchor">
 <a href="#editing-individual-exercises" class="anchor"></a>Editing Individual Exercises</h2>
-<p>The <code><a href="https://rdrr.io/pkg/decampr/man/open_exercise.html">open_exercise()</a></code> function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the <code>03_03</code> exercise, solutions, and prexercise code (which would be <code>exercises/exc_03_03.R</code>, <code>exercises/solution_03_03.R</code> and <code>exercises/preexercise_03_03.R</code>), I could use:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/open_exercise.html">open_exercise</a></span>(<span class="st">"03_03"</span>)</a></code></pre></div>
+<p>The <code><a href="reference/open_exercise.html">open_exercise()</a></code> function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the <code>03_03</code> exercise, solutions, and prexercise code (which would be <code>exercises/exc_03_03.R</code>, <code>exercises/solution_03_03.R</code> and <code>exercises/preexercise_03_03.R</code>), I could use:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/open_exercise.html">open_exercise</a></span>(<span class="st">"03_03"</span>)</a></code></pre></div>
 <p>And edit windows for each of these files would pop up.</p>
 </div>
 <div id="adding-a-new-chapter-file-" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adding-a-new-chapter-file-" class="anchor"></a>Adding a new chapter file.</h2>
-<p>We’ve got you covered. You can use <code><a href="https://rdrr.io/pkg/decampr/man/add_chapter.html">add_chapter()</a></code> to initialize a new chapter file and open it automatically.</p>
+<p>We’ve got you covered. You can use <code><a href="reference/add_chapter.html">add_chapter()</a></code> to initialize a new chapter file and open it automatically.</p>
 <p>Say I wanted to add a new <code>chapter6.md</code> to my course. I can use</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/add_chapter.html">add_chapter</a></span>(<span class="st">"chapter6.md"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/add_chapter.html">add_chapter</a></span>(<span class="st">"chapter6.md"</span>)</a></code></pre></div>
 <p>And this file will be created, along with the relevant YAML to get the course to work.</p>
-<p>I can then start adding exercises using the <code><a href="https://rdrr.io/pkg/decampr/man/add_exercise.html">add_exercise()</a></code> function (see below).</p>
+<p>I can then start adding exercises using the <code><a href="reference/add_exercise.html">add_exercise()</a></code> function (see below).</p>
 </div>
 <div id="adding-an-exercise-to-the-end-of-your-chapter" class="section level2">
 <h2 class="hasAnchor">
 <a href="#adding-an-exercise-to-the-end-of-your-chapter" class="anchor"></a>Adding an exercise to the end of your chapter</h2>
-<p>If you want to expand on your work, there is another convenience function called <code><a href="https://rdrr.io/pkg/decampr/man/add_exercise.html">add_exercise()</a></code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/decampr/man/add_exercise.html">add_exercise</a></span>(<span class="st">"chapter1.md"</span>, <span class="st">"01_10"</span>)</a></code></pre></div>
+<p>If you want to expand on your work, there is another convenience function called <code><a href="reference/add_exercise.html">add_exercise()</a></code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/add_exercise.html">add_exercise</a></span>(<span class="st">"chapter1.md"</span>, <span class="st">"01_10"</span>)</a></code></pre></div>
 <p>Which will add a new set of HTML exercise tags for your exercise to your <code>chapter1.md</code> file, and will open this file for further editing. Furthermore, the exercise, solution, and pre-exercise files will be open.</p>
 <p>Note that if you already have a codeblock with that id, function will return an error, preventing you from overwriting the files.</p>
 </div>

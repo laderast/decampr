@@ -7,7 +7,7 @@
 open_exercise(id, create = FALSE)
 }
 \arguments{
-\item{id}{- id of the exercise/solution/pre-exercise (such as "01_02)}
+\item{id}{- id of the exercise/solution/pre-exercise (such as "01_02")}
 
 \item{create}{- boolean. If FALSE, won't create the relevant files and returns NULL.
 If TRUE, then will create files in exercises directory}

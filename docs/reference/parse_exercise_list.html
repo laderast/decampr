@@ -128,8 +128,8 @@ or type "Normal" with the appropriate code chunks.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>chapter_file_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"decampr"</span>)
-<span class='no'>chapter_list</span> <span class='kw'>&lt;-</span> <span class='fu'>get_chapters</span>(<span class='no'>chapter_file_path</span>)
-<span class='no'>exercise_list</span> <span class='kw'>&lt;-</span> <span class='fu'>get_exercises</span>(<span class='no'>chapter_list</span><span class='kw'>[[</span><span class='fl'>1</span>]])
+<span class='no'>chapter_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_chapters.html'>get_chapters</a></span>(<span class='no'>chapter_file_path</span>)
+<span class='no'>exercise_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_exercises.html'>get_exercises</a></span>(<span class='no'>chapter_list</span><span class='kw'>[[</span><span class='fl'>1</span>]])
 <span class='no'>exercise_list</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_exercise_list</span>(<span class='no'>exercise_list</span>)
 <span class='co'>#show multiple exercise example</span>
 <span class='no'>exercise_list</span><span class='kw'>[[</span><span class='fl'>4</span>]]</div><div class='output co'>#&gt; $title

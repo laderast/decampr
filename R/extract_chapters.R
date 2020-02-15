@@ -332,15 +332,15 @@ make_exercise_path_files <- function(exercise_name){
   x <- exercise_name
   ex_file_name <- paste0("exc_", x, ".R")
   solution_file_name <- paste0("solution_", x, ".R")
-  pre_ex_name <- paste0("preexercise_", x, ".R")
+  #pre_ex_name <- paste0("preexercise_", x, ".R")
 
   ex_file_path <- here("exercises", ex_file_name)
   solution_file_path <- here("exercises", solution_file_name)
-  pre_ex_path <- here("exercises", pre_ex_name)
+  #pre_ex_path <- here("exercises", pre_ex_name)
 
   return(list(exercise_file = ex_file_path,
-              solution_file = solution_file_path,
-              pre_ex_file = pre_ex_path))
+              solution_file = solution_file_path
+              ))
 }
 
 
@@ -367,10 +367,10 @@ save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
 
     ex_file_name <- file_list$exercise_file
     solution_file_name <- file_list$solution_file
-    pre_ex_name <- file_list$pre_ex_file
+    #pre_ex_name <- file_list$pre_ex_file
 
-    writeLines(as.character(ex$pre_exercise),
-               con=pre_ex_name, sep="")
+    #writeLines(as.character(ex$pre_exercise),
+    #           con=pre_ex_name, sep="")
 
     if(ex$type == "Normal"){
       write(as.character(ex$pre_exercise),
@@ -402,7 +402,7 @@ save_exercise_list <- function(ex_list, chapter_name, chapter_file_path){
 
 #' Opens exercise files for editing
 #'
-#' @param id - id of the exercise/solution/pre-exercise (such as "01_02)
+#' @param id - id of the exercise/solution/pre-exercise (such as "01_02")
 #' @param create - boolean. If FALSE, won't create the relevant files and returns NULL.
 #' If TRUE, then will create files in exercises directory
 #'
@@ -414,7 +414,7 @@ open_exercise <- function(id, create=FALSE){
   exercise_path <- "exercises"
   exercise_file <- paste0("exc_", id, ".R")
   solution_file <- paste0("solution_", id, ".R")
-  pre_exercise_file <- paste0("preexercise_", id, ".R")
+  #pre_exercise_file <- paste0("preexercise_", id, ".R")
 
   ex_location <- here::here(exercise_path, exercise_file)
 
@@ -427,13 +427,22 @@ open_exercise <- function(id, create=FALSE){
     usethis::edit_file(sol_location)
   }
 
-  pre_location <- here::here(exercise_path, pre_exercise_file)
-  if(file.exists(pre_location) | create == TRUE){
-    usethis::edit_file(pre_location)
-  }
+  #pre_location <- here::here(exercise_path, pre_exercise_file)
+  #if(file.exists(pre_location) | create == TRUE){
+  #  usethis::edit_file(pre_location)
+  #}
 
 }
 
+#' Opens a chapter from the file name
+#'
+#' @param chapter_name - name of the chapter to open. Note that chapter names
+#' are numbered numerically (examples: 'chapter1.md', 'chapter2.md').
+#'
+#' @return opened chapter file if in an interactive session
+#' @export
+#'
+#' @examples
 open_chapter <- function(chapter_name){
   chapter_path <- here("chapters", chapter_name)
 
