@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_chapters.R
 \name{get_exercises}
 \alias{get_exercises}
-\title{Title}
+\title{Extracts exercises from a DataCamp chapter}
 \usage{
 get_exercises(chapter_file)
 }
@@ -13,7 +13,7 @@ get_exercises(chapter_file)
 
 }
 \description{
-Title
+Extracts exercises from a DataCamp chapter
 }
 \examples{
 chapter_file_path <- system.file("extdata/", package="decampr")

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parses exercise block into code chunks — parse_exercise_list • decampr</title>
+<title>Opens a chapter from the file name — open_chapter • decampr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Parses exercise block into code chunks — parse_exercise_list" />
+<meta property="og:title" content="Opens a chapter from the file name — open_chapter" />
 
-<meta property="og:description" content="Parses exercise block into code chunks" />
+<meta property="og:description" content="Opens a chapter from the file name" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,82 +110,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parses exercise block into code chunks</h1>
+    <h1>Opens a chapter from the file name</h1>
     
-    <div class="hidden name"><code>parse_exercise_list.Rd</code></div>
+    <div class="hidden name"><code>open_chapter.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Parses exercise block into code chunks</p>
+    <p>Opens a chapter from the file name</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>parse_exercise_list</span>(<span class='no'>exercise_list</span>)</pre>
+    <pre class="usage"><span class='fu'>open_chapter</span>(<span class='no'>chapter_name</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>exercise_list</th>
-      <td></td>
+      <th>chapter_name</th>
+      <td><p>- name of the chapter to open. Note that chapter names
+are numbered numerically (examples: 'chapter1.md', 'chapter2.md').</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list with each slot containing either type "multiple"
-or type "Normal" with the appropriate code chunks.</p>
+    <p>opened chapter file if in an interactive session</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>chapter_file_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"decampr"</span>)
-<span class='no'>chapter_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_chapters.html'>get_chapters</a></span>(<span class='no'>chapter_file_path</span>)
-<span class='no'>exercise_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_exercises.html'>get_exercises</a></span>(<span class='no'>chapter_list</span><span class='kw'>[[</span><span class='fl'>1</span>]])
-<span class='no'>exercise_list</span> <span class='kw'>&lt;-</span> <span class='fu'>parse_exercise_list</span>(<span class='no'>exercise_list</span>)
-<span class='co'>#show multiple exercise example</span>
-<span class='no'>exercise_list</span><span class='kw'>[[</span><span class='fl'>4</span>]]</div><div class='output co'>#&gt; $title
-#&gt; [1] "More about aes"
-#&gt; 
-#&gt; $introduction
-#&gt; [1] "For `geom_point()`, there are lots of other aesthetics. The important thing to know is that\naesthetics are properties of the `geom`. If you need to know the aesthetics that you can \nmap to a `geom`, you can always use `help()` (such as `help(geom_point)`).\n\nI'd ask you to look at `help(geom_point)`, but the documentation is not correct on Datacamp. \nInstead, look here: [http://ggplot.yhathq.com/docs/geom_point.html](http://ggplot.yhathq.com/docs/geom_point.html)\nand look at all the aesthetic mappings. \n\nWhich of the following is *not* a mappable aesthetic to `geom_point()`?"
-#&gt; 
-#&gt; $instructions
-#&gt; [1] "\n- `x`\n- `shape`\n- `linetype`\n\n"
-#&gt; 
-#&gt; $sct
-#&gt; [1] "success_msg(\"Great! Now you know where to look for mappable aesthetics.\")\nmsg1 = \"Nope. This is a mappable aesthetic to `geom_point().`\"\nmsg3 = \"Correct. `linetype` is not mappable to `geom_point()`. Points don't have a `linetype`, do they?\"\ntest_mc(correct = 3, feedback_msgs=c(msg1, msg1, msg3))"
-#&gt; 
-#&gt; $hint
-#&gt; [1] ""
-#&gt; 
-#&gt; $type
-#&gt; [1] "Multiple"
-#&gt; </div><div class='input'><span class='co'>#show normal exercise example</span>
-<span class='no'>exercise_list</span><span class='kw'>[[</span><span class='fl'>5</span>]]</div><div class='output co'>#&gt; $title
-#&gt; [1] "Points versus lines"
-#&gt; 
-#&gt; $introduction
-#&gt; [1] "\nThe great thing about `ggplot2` is that it's easy to swap representations. \nInstead of x-y points, we can plot the data as a line graph by swapping `geom_line()`\nfor `geom_point()`."
-#&gt; 
-#&gt; $instructions
-#&gt; [1] "\nFirst run the code to see the plot with points. Change the `geom_point()` in the following graph to `geom_line()`. What happened?\nHow did the visual presentation of the data change?\n\n"
-#&gt; 
-#&gt; $pre_exercise
-#&gt; [1] "library(dplyr)\nlibrary(gapminder)\nlibrary(ggplot2)\ngap1992 &lt;- gapminder %&gt;% filter(year == 1992)"
-#&gt; 
-#&gt; $sample_code
-#&gt; [1] "ggplot(gap1992, aes(x = log(gdpPercap), y = lifeExp, color=continent)) +\n  geom_point() "
-#&gt; 
-#&gt; $solution
-#&gt; [1] "ggplot(gap1992, aes(x = log(gdpPercap), y = lifeExp, color=continent)) +\n  geom_line() "
-#&gt; 
-#&gt; $hint
-#&gt; [1] ""
-#&gt; 
-#&gt; $type
-#&gt; [1] "Normal"
-#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -193,9 +145,7 @@ or type "Normal" with the appropriate code chunks.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
