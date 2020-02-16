@@ -18,6 +18,16 @@ create_lesson_repo <- function(destdir = NULL) {
 
 #' Adds a data object to both the master and binder branch
 #'
+#' Because the course repo uses both a master and binder branch, we need
+#' to make sure the data objects are going in both branches.
+#'
+#' The function will apply git stash to the repository before doing anything.
+#' Then the object is added to both the master and binder branch using
+#' usethis::use_data() before being committed to both.
+#'
+#' The function then switches back to the current repository and
+#' applies the stash to get back any uncommitted changes.
+#'
 #' @param dataobj - a data object, usually a tibble or data.frame
 #'
 #' @return added and committed objects to both the binder and test branches
@@ -26,6 +36,8 @@ create_lesson_repo <- function(destdir = NULL) {
 #' @examples
 add_data_to_lesson <- function(dataobj){
   current_branch <- get_branch_head()
+  #stash current changes
+  git2r::stash()
 
   #check and make sure we're on master first
   if(current_branch != "master"){
@@ -44,7 +56,9 @@ add_data_to_lesson <- function(dataobj){
   msg <- paste("Adding", data_obj_name, "to binder branch")
   git2r::commit(message=msg)
 
-  git2r::checkout(branch="master")
+  git2r::checkout(branch=current_branch)
+  #apply stash using stash_pop to get back to where we were
+  git2r::stash_pop()
   usethis::ui_done("Added your object to both binder and master branches")
 }
 
