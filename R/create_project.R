@@ -30,7 +30,7 @@ create_lesson_repo <- function(destdir = NULL) {
 #'
 #' @param dataobj - a data object, usually a tibble or data.frame
 #'
-#' @return added and committed objects to both the binder and test branches
+#' @return added and committed objects to both the binder and master branches
 #' @export
 #'
 #' @examples

@@ -46,6 +46,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/converting-repo.html">Converting your DataCamp repo</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -66,12 +78,11 @@
 <!-- badges: end -->
 <p><code>decampr</code> consists of some simple utilities to:</p>
 <ol>
-<li>process R-based DataCamp lessons to Ines Montani’s Gatsby/Binder based course setup available here: <a href="https://github.com/ines/course-starter-r" class="uri">https://github.com/ines/course-starter-r</a>
+<li>Process and convert R-based DataCamp lessons to Ines Montani’s Gatsby/Binder based course setup available here: <a href="https://github.com/ines/course-starter-r" class="uri">https://github.com/ines/course-starter-r</a>
 </li>
 <li>Start a course from scratch with some convenience functions to create and update content.</li>
 </ol>
-<p><code>decampr</code> speeds up building these courses by parsing the DataCamp format and outputting the correct files (chapter.mds, exercises, solutions, and multiple choice questions).</p>
-<p>Note that I’m not a regular expression master and I don’t have access to any DataCamp repositories other than my own online one here: <a href="http://github.com/laderast/RBootcamp_old" class="uri">http://github.com/laderast/RBootcamp_old</a>. If you have an example chapter and would like to contribute it as a reproducible example, please add a PR and put it in <code>inst/extdata</code>.</p>
+<p>Note that I’m mostly focusing on use case #2 these days.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -79,66 +90,20 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"laderast/decampr"</span>)</a></code></pre></div>
 </div>
-<div id="prepping-your-datacamp-repo" class="section level2">
+<div id="using-decampr-to-create-a-course-repo-from-scratch" class="section level2">
 <h2 class="hasAnchor">
-<a href="#prepping-your-datacamp-repo" class="anchor"></a>Prepping your DataCamp Repo</h2>
-<p><code>decampr</code> is based on some rather fragile regular expressions, particularly for extracting the exercise code. It assumes that you have at least two linebreaks separating each exercise. That is:</p>
-<pre><code>\*\*\* =sct
-\`\`\`{r}
-success_msg("Great! You learned some basics about `data.frame`s! Let's move on.")
-test_function("colnames", incorrect_msg = "did you use colnames(gap1992)?")
-test_function("nrow", incorrect_msg = "did you use nrow(gap1992)")
-`` ``` ``
-              \#\# &lt;- Note there are two line breaks, here
-              \#\# &lt;- and here!
---- type:MultipleChoiceExercise lang:r xp:100 skills:1 key:d599f92ec8
-\#\# Thinking about aesthetics
-Now that we've learned a little about the `data.frame`, we can get to the fun part: making graphs.</code></pre>
-<p>Comments should not have whitespace after the <code>#</code>:</p>
-<pre><code>\#\#proper comment
-
-\#\# improper comment (will be parsed incorrectly)</code></pre>
-<p>Also, make sure the last exercise in your chapter has at least two linebreaks and is followed by a <code>---</code>.</p>
-</div>
-<div id="using-decampr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-decampr" class="anchor"></a>Using <code>decampr</code>
-</h2>
+<a href="#using-decampr-to-create-a-course-repo-from-scratch" class="anchor"></a>Using <code>decampr</code> to create a course repo from scratch</h2>
 <p><code>decampr</code> assumes that your datacamp repo is local to your system.</p>
-<p>The first thing to do is to use <code><a href="https://usethis.r-lib.org/reference/create_from_github.html">usethis::create_from_github()</a></code> from the <code>usethis</code> package to clone Ines’ basic course repository to your computer:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/create_from_github.html">create_from_github</a></span>(<span class="st">"ines/course-starter-r"</span>)</a></code></pre></div>
+<p>The first thing to do is to use <code>decampr::create_course_repo()</code> to clone Ines’ basic course repository to your computer:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">decampr<span class="op">::</span><span class="kw">create_course_repo</span>()</a></code></pre></div>
 <p>This will clone the <code>course-starter-r</code> repo to your computer (by default, it saves it to your Desktop) and open up a new project with your cloned repo.</p>
-<p>Now you can start processing your DataCamp repo:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(decampr)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">repo_path &lt;-<span class="st"> "c:/Code/RBootcamp_old"</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#get all chapters in the repo path</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">chapter_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_chapters.html">get_chapters</a></span>(repo_path)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#Or, can just get a single chapter</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">chapter1 &lt;-<span class="st"> </span><span class="kw">get_chapter</span>(<span class="st">"c:/Code/RBootcamp_old/chapter1.md"</span>)</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#get all exercises for chapter 1</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_exercises.html">get_exercises</a></span>(chapter_list[[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#could also run on chapter 1</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_exercises.html">get_exercises</a></span>(chapter1)</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#extract exercise information</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/parse_exercise_list.html">parse_exercise_list</a></span>(exercise_list)</a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#number the exercises</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19">exercise_list &lt;-<span class="st"> </span><span class="kw"><a href="reference/number_ex_list.html">number_ex_list</a></span>(exercise_list, <span class="dt">basename =</span> <span class="st">"01"</span>)</a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#save the exercises and rewritten chapter.md</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="kw"><a href="reference/save_exercise_list.html">save_exercise_list</a></span>(exercise_list, <span class="st">"chapter1.md"</span>, <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(repo_path, <span class="st">"/"</span>, <span class="st">"chapter1.md"</span>))</a></code></pre></div>
-<p>Exercises/solutions/pre-exercise code will be written to <code>exercises/</code> and the chapter.md files will be written to <code>chapters/</code>.</p>
-<p>Note that submission correctness tests are not currently captured, nor is the correct answer to the multiple choice exercise captured. The correct answer can be added to that exercise by editing the appropriate <code>chapter.md</code> file (see Ines` documentation for more info).</p>
+<p>Make sure to rename it and save it as a new project. Also, use <code>use_github()</code> to add it to GitHub, so you can serve the repository up to both your webhost and mybinder.org.</p>
 </div>
 <div id="editing-individual-exercises" class="section level2">
 <h2 class="hasAnchor">
 <a href="#editing-individual-exercises" class="anchor"></a>Editing Individual Exercises</h2>
 <p>The <code><a href="reference/open_exercise.html">open_exercise()</a></code> function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the <code>03_03</code> exercise, solutions, and prexercise code (which would be <code>exercises/exc_03_03.R</code>, <code>exercises/solution_03_03.R</code> and <code>exercises/preexercise_03_03.R</code>), I could use:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/open_exercise.html">open_exercise</a></span>(<span class="st">"03_03"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/open_exercise.html">open_exercise</a></span>(<span class="st">"03_03"</span>)</a></code></pre></div>
 <p>And edit windows for each of these files would pop up.</p>
 </div>
 <div id="adding-a-new-chapter-file-" class="section level2">
@@ -146,7 +111,7 @@ Now that we've learned a little about the `data.frame`, we can get to the fun pa
 <a href="#adding-a-new-chapter-file-" class="anchor"></a>Adding a new chapter file.</h2>
 <p>We’ve got you covered. You can use <code><a href="reference/add_chapter.html">add_chapter()</a></code> to initialize a new chapter file and open it automatically.</p>
 <p>Say I wanted to add a new <code>chapter6.md</code> to my course. I can use</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/add_chapter.html">add_chapter</a></span>(<span class="st">"chapter6.md"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/add_chapter.html">add_chapter</a></span>(<span class="st">"chapter6.md"</span>)</a></code></pre></div>
 <p>And this file will be created, along with the relevant YAML to get the course to work.</p>
 <p>I can then start adding exercises using the <code><a href="reference/add_exercise.html">add_exercise()</a></code> function (see below).</p>
 </div>
@@ -154,7 +119,7 @@ Now that we've learned a little about the `data.frame`, we can get to the fun pa
 <h2 class="hasAnchor">
 <a href="#adding-an-exercise-to-the-end-of-your-chapter" class="anchor"></a>Adding an exercise to the end of your chapter</h2>
 <p>If you want to expand on your work, there is another convenience function called <code><a href="reference/add_exercise.html">add_exercise()</a></code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/add_exercise.html">add_exercise</a></span>(<span class="st">"chapter1.md"</span>, <span class="st">"01_10"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/add_exercise.html">add_exercise</a></span>(<span class="st">"chapter1.md"</span>, <span class="st">"01_10"</span>)</a></code></pre></div>
 <p>Which will add a new set of HTML exercise tags for your exercise to your <code>chapter1.md</code> file, and will open this file for further editing. Furthermore, the exercise, solution, and pre-exercise files will be open.</p>
 <p>Note that if you already have a codeblock with that id, function will return an error, preventing you from overwriting the files.</p>
 </div>
@@ -177,6 +142,7 @@ Now that we've learned a little about the `data.frame`, we can get to the fun pa
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>Please note that the ‘decampr’ project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Note that I’m not a regular expression master and I don’t have access to any DataCamp repositories other than my own online one here: <a href="http://github.com/laderast/RBootcamp_old" class="uri">http://github.com/laderast/RBootcamp_old</a>. If you have an example chapter and would like to contribute it as a reproducible example, please add a PR and put it in <code>inst/extdata</code>.</p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
@@ -197,6 +163,7 @@ Now that we've learned a little about the `data.frame`, we can get to the fun pa
 <div class="community">
 <h2>Community</h2>
 <ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>

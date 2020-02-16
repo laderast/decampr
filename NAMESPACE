@@ -2,6 +2,7 @@
 
 export("%>%")
 export(add_chapter)
+export(add_data_to_lesson)
 export(add_exercise)
 export(convert_to_unix_linebreaks)
 export(create_lesson_repo)
