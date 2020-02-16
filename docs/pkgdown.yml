@@ -3,4 +3,5 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   converting-repo: converting-repo.html
+  from_scratch: from_scratch.html
 
