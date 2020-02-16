@@ -5,10 +5,10 @@
 
 `decampr` consists of some simple utilities to:
 
-1. Process and convert R-based DataCamp lessons to Ines Montani's Gatsby/Binder based course setup available here: https://github.com/ines/course-starter-r 
-2. Start a course from scratch with some convenience functions to create and update content.
+1. [**Start a course from scratch** ](https://laderast.github.io/decampr/articles/from_scratch.html) using [Ines Montani's Gatsby/Binder based course setup]( https://github.com/ines/course-starter-r) with some convenience functions to create and update content.
+2. [**Process and convert R-based DataCamp lessons**](https://laderast.github.io/decampr/articles/converting-repo.html) to Ines Montani's Gatsby/Binder based course setup.
 
-Note that I'm mostly focusing on use case #2 these days.
+Note that I'm mostly focusing on use case #1 these days. 
 
 ## Installation
 
@@ -18,64 +18,6 @@ You can install the github version of `decampr` with:
 install.packages("remotes")
 remotes::install_github("laderast/decampr")
 ```
-
-## Using `decampr` to create a course repo from scratch
-
-`decampr` assumes that your datacamp repo is local to your system.
-
-The first thing to do is to use `decampr::create_course_repo()` to clone Ines' basic course repository to your computer:
-
-```r
-decampr::create_course_repo()
-```
-
-This will clone the `course-starter-r` repo to your computer (by default, it saves it to your Desktop) and open up a new project with your cloned repo.
-
-Make sure to rename it and save it as a new project. Also, use `use_github()` to add it to GitHub, so you can serve the repository up to both your webhost and mybinder.org.
-
-## Editing Individual Exercises
-
-The `open_exercise()` function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the `03_03` exercise, solutions, and prexercise code (which would be `exercises/exc_03_03.R`, `exercises/solution_03_03.R` and `exercises/preexercise_03_03.R`), I could use:
-
-```r
-open_exercise("03_03")
-```
-
-And edit windows for each of these files would pop up.
-
-## Adding a new chapter file.
-
-We've got you covered. You can use `add_chapter()` to initialize a new chapter file and open it automatically.
-
-Say I wanted to add a new `chapter6.md` to my course. I can use
-
-```r
-add_chapter("chapter6.md")
-```
-
-And this file will be created, along with the relevant YAML to get the course to work.
-
-I can then start adding exercises using the `add_exercise()` function (see below).
-
-## Adding an exercise to the end of your chapter
-
-If you want to expand on your work, there is another convenience function called `add_exercise()`:
-
-```r
-add_exercise("chapter1.md", "01_10")
-```
-
-Which will add a new set of HTML exercise tags for your exercise to your `chapter1.md` file, and will open this file for further editing. Furthermore, the exercise, solution, and pre-exercise files will be open.
-
-Note that if you already have a codeblock with that id, function will return an error, preventing you from overwriting the files.
-
-## TODO: add_multiple_choice()
-
-Coming soon!
-
-## TODO: add_slides()
-
-Coming soon!
 
 ## Acknowledgements
 

@@ -56,6 +56,9 @@
 <li>
       <a href="articles/converting-repo.html">Converting your DataCamp repo</a>
     </li>
+    <li>
+      <a href="articles/from_scratch.html">Creating a Lesson Repo From Scratch</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -78,60 +81,18 @@
 <!-- badges: end -->
 <p><code>decampr</code> consists of some simple utilities to:</p>
 <ol>
-<li>Process and convert R-based DataCamp lessons to Ines Montani’s Gatsby/Binder based course setup available here: <a href="https://github.com/ines/course-starter-r" class="uri">https://github.com/ines/course-starter-r</a>
-</li>
-<li>Start a course from scratch with some convenience functions to create and update content.</li>
+<li>
+<a href="https://laderast.github.io/decampr/articles/from_scratch.html"><strong>Start a course from scratch</strong></a> using <a href="https://github.com/ines/course-starter-r">Ines Montani’s Gatsby/Binder based course setup</a> with some convenience functions to create and update content.</li>
+<li>
+<a href="https://laderast.github.io/decampr/articles/converting-repo.html"><strong>Process and convert R-based DataCamp lessons</strong></a> to Ines Montani’s Gatsby/Binder based course setup.</li>
 </ol>
-<p>Note that I’m mostly focusing on use case #2 these days.</p>
+<p>Note that I’m mostly focusing on use case #1 these days.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the github version of <code>decampr</code> with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"laderast/decampr"</span>)</a></code></pre></div>
-</div>
-<div id="using-decampr-to-create-a-course-repo-from-scratch" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-decampr-to-create-a-course-repo-from-scratch" class="anchor"></a>Using <code>decampr</code> to create a course repo from scratch</h2>
-<p><code>decampr</code> assumes that your datacamp repo is local to your system.</p>
-<p>The first thing to do is to use <code>decampr::create_course_repo()</code> to clone Ines’ basic course repository to your computer:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">decampr<span class="op">::</span><span class="kw">create_course_repo</span>()</a></code></pre></div>
-<p>This will clone the <code>course-starter-r</code> repo to your computer (by default, it saves it to your Desktop) and open up a new project with your cloned repo.</p>
-<p>Make sure to rename it and save it as a new project. Also, use <code>use_github()</code> to add it to GitHub, so you can serve the repository up to both your webhost and mybinder.org.</p>
-</div>
-<div id="editing-individual-exercises" class="section level2">
-<h2 class="hasAnchor">
-<a href="#editing-individual-exercises" class="anchor"></a>Editing Individual Exercises</h2>
-<p>The <code><a href="reference/open_exercise.html">open_exercise()</a></code> function will open the exercises in Rstudio with a particular_id. For example, if I wanted to edit the <code>03_03</code> exercise, solutions, and prexercise code (which would be <code>exercises/exc_03_03.R</code>, <code>exercises/solution_03_03.R</code> and <code>exercises/preexercise_03_03.R</code>), I could use:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/open_exercise.html">open_exercise</a></span>(<span class="st">"03_03"</span>)</a></code></pre></div>
-<p>And edit windows for each of these files would pop up.</p>
-</div>
-<div id="adding-a-new-chapter-file-" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-a-new-chapter-file-" class="anchor"></a>Adding a new chapter file.</h2>
-<p>We’ve got you covered. You can use <code><a href="reference/add_chapter.html">add_chapter()</a></code> to initialize a new chapter file and open it automatically.</p>
-<p>Say I wanted to add a new <code>chapter6.md</code> to my course. I can use</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/add_chapter.html">add_chapter</a></span>(<span class="st">"chapter6.md"</span>)</a></code></pre></div>
-<p>And this file will be created, along with the relevant YAML to get the course to work.</p>
-<p>I can then start adding exercises using the <code><a href="reference/add_exercise.html">add_exercise()</a></code> function (see below).</p>
-</div>
-<div id="adding-an-exercise-to-the-end-of-your-chapter" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-an-exercise-to-the-end-of-your-chapter" class="anchor"></a>Adding an exercise to the end of your chapter</h2>
-<p>If you want to expand on your work, there is another convenience function called <code><a href="reference/add_exercise.html">add_exercise()</a></code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/add_exercise.html">add_exercise</a></span>(<span class="st">"chapter1.md"</span>, <span class="st">"01_10"</span>)</a></code></pre></div>
-<p>Which will add a new set of HTML exercise tags for your exercise to your <code>chapter1.md</code> file, and will open this file for further editing. Furthermore, the exercise, solution, and pre-exercise files will be open.</p>
-<p>Note that if you already have a codeblock with that id, function will return an error, preventing you from overwriting the files.</p>
-</div>
-<div id="todo-add_multiple_choice" class="section level2">
-<h2 class="hasAnchor">
-<a href="#todo-add_multiple_choice" class="anchor"></a>TODO: add_multiple_choice()</h2>
-<p>Coming soon!</p>
-</div>
-<div id="todo-add_slides" class="section level2">
-<h2 class="hasAnchor">
-<a href="#todo-add_slides" class="anchor"></a>TODO: add_slides()</h2>
-<p>Coming soon!</p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
