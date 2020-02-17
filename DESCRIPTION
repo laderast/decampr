@@ -19,7 +19,8 @@ Imports:
     dplyr,
     usethis,
     magrittr,
-    git2r
+    git2r,
+    xml2
 Suggests: 
     testthat (>= 2.1.0),
     knitr

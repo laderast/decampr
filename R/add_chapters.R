@@ -1,8 +1,34 @@
-get_last_exercise <- function(){
+get_last_exercise_title <- function(chapter_file){
+   xml_file <- xml2::read_html(here("chapters", chapter_file))
+   exercises <- xml_file %>% html_nodes("exercise")
+   last_node <- exercises[[length(exercises)]]
+   get_node_title(last_node)
+}
+
+get_last_exercise_num <- function(chapter_file){
+  xml_file <- xml2::read_html(here("chapters", chapter_file))
+  exercises <- xml_file %>% html_nodes("exercise")
+  last_node <- exercises[[length(exercises)]]
+  xml_attr(last_node, attr="id")
+}
+
+get_node_title <- function(xml_node) {
+  xml_attr(xml_node, attr="title")
+}
+
+find_pattern_line <- function(chapter_file, pattern){
+  file_lines <- readLines(here("chapters", chapter_file))
+  grep(pattern=pattern, x=file_lines)
+}
+
+#To Do: use rstudioapi::setCursonPosition
+get_position_of_exercise <- function(exercise_num){
+
+  xml2::read_html("../course-starter-r/chapters/chapter1.md")
 
 }
 
-get_position_of_exercise <- function(){}
+
 
 
 #' Add a new chapter file to your course
@@ -17,7 +43,7 @@ get_position_of_exercise <- function(){}
 add_chapter <- function(chapter_name){
   chapter_file_path <- here::here("chapters", chapter_name)
   if(file.exists(chapter_file_path)){
-    stop("chapter already exists - you can use open_chapter('chapter.md') to open it")
+    usethis::ui_stop("chapter already exists - you can use open_chapter('chapter.md') to open it")
   }
 
   yaml <- make_yaml_block(chapter_name, chapter_file_path = NULL)
@@ -98,7 +124,7 @@ add_exercise <- function(chapter_file="chapter1.md", exercise_id = "01_01"){
   chapter_file_path <- here("chapters", chapter_file)
 
   if(!file.exists(chapter_file_path)){
-    stop("Your chapter file doesn't exist yet")
+    ui_stop("Your chapter file doesn't exist yet")
   }
 
   if(file.exists(chapter_file_path)){
@@ -106,7 +132,7 @@ add_exercise <- function(chapter_file="chapter1.md", exercise_id = "01_01"){
   }
 
   if(exercise_id %in% id_list){
-    stop("Your id already exists in the chapter file")
+    ui_stop("Your id already exists in the chapter file")
   }
 
   exercise_block <- init_exercise_block(exercise_id)
