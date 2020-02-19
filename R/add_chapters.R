@@ -1,35 +1,57 @@
-get_last_exercise_title <- function(chapter_file){
-   xml_file <- xml2::read_html(here("chapters", chapter_file))
-   exercises <- xml_file %>% html_nodes("exercise")
-   last_node <- exercises[[length(exercises)]]
-   get_node_title(last_node)
-}
-
-get_last_exercise_num <- function(chapter_file){
-  xml_file <- xml2::read_html(here("chapters", chapter_file))
-  exercises <- xml_file %>% html_nodes("exercise")
+get_last_exercise <- function(xml_file){
+  exercises <- xml_file %>% rvest::html_nodes("exercise")
   last_node <- exercises[[length(exercises)]]
-  xml_attr(last_node, attr="id")
+  return(last_node)
 }
 
-get_node_title <- function(xml_node) {
+
+get_chapter_html <- function(chapter_file){
+
+  if(!file.exists(chapter_file)){
+    ui_stop("This chapter doesn't exist yet. Use add_chapter() to add it.")
+  }
+
+  xml_file <- xml2::read_html(chapter_file)
+  return(xml_file)
+}
+
+get_exercise_title <- function(xml_node) {
   xml_attr(xml_node, attr="title")
 }
 
+get_exercise_id <- function(xml_node){
+  xml_attr(xml_node, attr="id")
+}
+
 find_pattern_line <- function(chapter_file, pattern){
-  file_lines <- readLines(here("chapters", chapter_file))
+  file_lines <- readLines(chapter_file)
   grep(pattern=pattern, x=file_lines)
 }
 
-#To Do: use rstudioapi::setCursonPosition
-get_position_of_exercise <- function(exercise_num){
+#To Do: use rstudioapi::setCursorPosition
+get_line_num_of_last_exercise <- function(chapter_file){
 
-  xml2::read_html("../course-starter-r/chapters/chapter1.md")
+  xml_file <- get_chapter_html(chapter_file)
+  last_node <- get_last_exercise(xml_file)
+  ex_title <- get_exercise_title(last_node)
+  ex_id <- get_exercise_id(last_node)
+  pattern_line <- find_pattern_line(chapter_file, ex_title)
 
+  return(pattern_line)
 }
 
+open_exercise_at_line <- function(chapter_file, line_num){
+  usethis::edit_file(chapter_file)
+  id <- getSourceEditorContext()$id
+  doc_range <- document_range(c(line_num,0), c(line_num +1,0))
+  rstudioapi::setCursorPosition(c(line_num,0), id)
+  rstudioapi::setSelectionRanges(doc_range)
+}
 
-
+open_exercise_editor_num <- function(chapter_file){
+  line_num <- get_line_num_of_last_exercise(chapter_file)
+  open_exercise_at_line(chapter_file, line_num)
+}
 
 #' Add a new chapter file to your course
 #'
@@ -148,6 +170,6 @@ add_exercise <- function(chapter_file="chapter1.md", exercise_id = "01_01"){
     open_exercise(exercise_id, create=TRUE)
     }
 
-  cat(exercise_id, " exercises are now open for editing")
+  cat(exercise_id, " exercise are now open for editing")
 
 }

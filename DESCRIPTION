@@ -20,7 +20,8 @@ Imports:
     usethis,
     magrittr,
     git2r,
-    xml2
+    xml2,
+    rvest
 Suggests: 
     testthat (>= 2.1.0),
     knitr
